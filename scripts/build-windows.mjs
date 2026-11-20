@@ -1,0 +1,22 @@
+import {readFile,writeFile,mkdir,copyFile} from 'node:fs/promises';
+import {join,resolve,basename} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const root=resolve(fileURLToPath(new URL('..',import.meta.url))),release=join(root,'.release');
+await mkdir(release,{recursive:true});
+const pkg=JSON.parse(await readFile(join(root,'plugin/package.json'),'utf8'));
+const pack=JSON.parse(execFileSync('npm',['pack','--ignore-scripts','--pack-destination',release,'--json'],{cwd:join(root,'plugin'),encoding:'utf8'}))[0];
+const file=join(release,pack.filename),sha=data=>createHash('sha256').update(data).digest('hex');
+const packageBytes=await readFile(file),folder=join(release,'windows-'+pkg.version);await mkdir(folder,{recursive:true});
+const archiveName='dsh-composer-prediction-'+pkg.version+'.tgz';await copyFile(file,join(folder,archiveName));
+for(const name of ['install.ps1','install.cmd']){let text=await readFile(join(root,'windows',name),'utf8');if(name==='install.cmd')text=text.replace(/set "pluginVersion=[^"]+"/,'set "pluginVersion='+pkg.version+'"');await writeFile(join(folder,name),text);}
+await writeFile(join(folder,'README.zh-CN.md'),(await readFile(join(root,'docs/windows.zh-CN.md'),'utf8')).replaceAll('(en/windows.md)','(README.en.md)'));
+await writeFile(join(folder,'README.en.md'),(await readFile(join(root,'docs/en/windows.md'),'utf8')).replaceAll('(../windows.zh-CN.md)','(README.zh-CN.md)'));
+await writeFile(join(folder,'package-manifest.json'),JSON.stringify({name:pkg.name,version:pkg.version,file:archiveName,sha256:sha(packageBytes),integrity:pack.integrity},null,2)+'\n');
+const zip=join(release,'DSH-Composer-Prediction-'+pkg.version+'-Windows.zip');
+execFileSync('python3',['-c',"import zipfile,pathlib,sys; r=pathlib.Path(sys.argv[1]); z=zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED); [z.write(p,p.name) for p in sorted(r.iterdir()) if p.is_file()]; z.close()",folder,zip]);
+const checksums=[sha(packageBytes)+'  '+basename(file),sha(await readFile(zip))+'  '+basename(zip)].join('\n')+'\n';
+await writeFile(join(release,'SHA256SUMS.txt'),checksums);
+await writeFile(join(release,'RELEASE-VERIFIED.json'),JSON.stringify({name:pkg.name,version:pkg.version,file:pack.filename,bytes:packageBytes.length,sha256:sha(packageBytes),integrity:pack.integrity,windowsFile:basename(zip),windowsSha256:sha(await readFile(zip))},null,2)+'\n');
+console.log(checksums);

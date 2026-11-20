@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Composer Prediction",
+    "description": "Cache-aware next-message suggestions with Tab completion, local reliability checks, workspace and conversation blacklists, and transparent usage accounting.",
+    "detail": "docs/README.en.md"
+  }
+}

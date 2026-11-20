@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "model": "deepseek-v4-pro",
+  "source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+  "checkedAt": "2026-11-12T00:00:00+08:00",
+  "effectiveFromBasis": "Observed on 2026-11-12; earlier effective date is not asserted. Add explicit historical versions for older requests.",
+  "unit": "per-million-tokens",
+  "versions": [
+    {
+      "id": "deepseek-v4-pro-observed-20261112",
+      "effectiveFrom": "2026-11-12T00:00:00+08:00",
+      "currency": "CNY",
+      "rates": {
+        "input": 9,
+        "cacheRead": 0.3,
+        "output": 27
+      },
+      "schedule": {
+        "type": "deepseek-cn-peak",
+        "offPeakMultiplier": 0.5,
+        "calendar": {
+          "coverageYears": [
+            2026
+          ],
+          "dates": [
+            "2026-01-01",
+            "2026-01-02",
+            "2026-01-03",
+            "2026-02-15",
+            "2026-02-16",
+            "2026-02-17",
+            "2026-02-18",
+            "2026-02-19",
+            "2026-02-20",
+            "2026-02-21",
+            "2026-02-22",
+            "2026-02-23",
+            "2026-04-04",
+            "2026-04-05",
+            "2026-04-06",
+            "2026-05-01",
+            "2026-05-02",
+            "2026-05-03",
+            "2026-05-04",
+            "2026-05-05",
+            "2026-06-19",
+            "2026-06-20",
+            "2026-06-21",
+            "2026-09-25",
+            "2026-09-26",
+            "2026-09-27",
+            "2026-10-01",
+            "2026-10-02",
+            "2026-10-03",
+            "2026-10-04",
+            "2026-10-05",
+            "2026-10-06",
+            "2026-10-07"
+          ],
+          "sourceUrl": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202511/t20251104_4258873.html",
+          "policy": "official-scheduled-days-off",
+          "interpretation": "国务院2026放假调休安排中的放假日。DeepSeek未公布逐日计费日历；此映射为显式可替换的日历解释，非供应商账单保证。调休周末仍按DeepSeek周末全天空闲规则。"
+        }
+      }
+    }
+  ]
+}

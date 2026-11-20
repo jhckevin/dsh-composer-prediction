@@ -1,0 +1,100 @@
+{
+  "dshCommit": "e8f7b93a344964de3dca1ace9e72b6e4d6de87cb",
+  "runtimeDependencies": "node>=24.9; DSH browser module table",
+  "publicSourceArchiveSHA256": "96bbd0ac8201c9a74a1641efe53fcb20c69d11e9ef8525ef01e1fede662d0c20",
+  "tokenizers": {
+    "deepseek-v4.json": "97d2f31b020d18b5aee5c9b3d5b4efb10ea210f3fe3f7dffe3f1cd90542d6b19",
+    "deepseek-v41.json": "81f64d1248a68ce3663e07ab3ee48b851e5df0e32d27cb98e4c9a268151e8d99"
+  },
+  "tokenizerSource": "deepseek-ai/deepseek-recipe/static/tokenizers/{v4,v41}; SHA matches source README provenance",
+  "tokenizerRuntime": "pure JS/TS, bundled, no runtime network/download/native build",
+  "tokenizerPlainPipelinesEqual": true,
+  "licenseSources": {
+    "js-tiktoken": "https://raw.githubusercontent.com/dqbd/tiktoken/main/LICENSE"
+  },
+  "version": "0.8.0-beta.4",
+  "codexReferenceCommit": "d2f76324729d7c4a2b3225cfe42c7dbf162d98b7",
+  "codexRemotePromptIncluded": false,
+  "builtOn": "remote desktop-research-wsl2; no local development or compilation",
+  "remoteNodeVersion": "24.22.2",
+  "artifacts": {
+    "lib/dsh-native.mjs.map": "17619b879a6d3ac566c1fd877655c6b3b6e229461cf4bcb61ca42b39e7a8abd6",
+    "lib/client.js": "d6640b34bd35dee7760b6bb6300d61b8a5caa02d12fc25451d8e441100a1fde8",
+    "lib/tokenizer-runtime.mjs": "673d478f7d60996e9f621bc6bd12899e48ea0313d5564d3995e4c0d29478e645",
+    "lib/dsh-native.mjs": "289387b9ad14bcfe8f67b3030f0cfdf8e8e53015e03241f94abaa2f570bb152e",
+    "lib/schema.mjs.map": "27f2ae8243eae4e473cebb83f00718b3b934851c290f8418331841078b18de19",
+    "lib/client.js.map": "ef22ca070693b671ab3d5985d9b82de7a597d9d617ffd8596f20743c3f387c0f",
+    "lib/schema.mjs": "d884840a5871239ce3e105de464c35014de7dcbb8f5793aa213b8588cb74de0d"
+  },
+  "verification": {
+    "remoteTests": 312,
+    "passed": 312,
+    "failed": 0,
+    "desktopTarget": "0.2.2-rc.1",
+    "browserComponents": "beta3 actual React/native primitives with demo data",
+    "screenshots": 16,
+    "browserGeometryVerified": true,
+    "fullNativeDesktopAcceptance": "not claimed; fixed 64-item acceptance denominator unchanged",
+    "npmPublication": "not yet published; verify registry before installation",
+    "modelNetworkInRegressionTests": "mocked",
+    "nativeFlowBrowserWidths": [
+      1160,
+      540
+    ],
+    "versionAlgorithms": 5,
+    "browserResponsiveChecks": 20,
+    "minimumReasoningTests": 33,
+    "nativeHostMinimumIntegration": true,
+    "paidModelCalls": 0
+  },
+  "lifecycle": {
+    "generation": "user-submit then normal assistant completion",
+    "watchdog": "logical send, turn, token and structural event budgets; no timer polling",
+    "retroactiveHours": 24,
+    "retroactiveLimit": 3,
+    "persistedResultAgeLimit": null,
+    "persistedResultGlobalEntryLimit": null,
+    "minRetainedPrefixRatio": 0.5,
+    "foregroundAffects": "display only"
+  },
+  "parity": {
+    "parentEffectiveCompaction": "inherited",
+    "portableWindowStrategies": "local enhancement, not native Codex behavior",
+    "proprietaryServerControls": "not available in portable APIs"
+  },
+  "ui": {
+    "settingsSlot": "settings.section",
+    "localeService": "locale.bind + locale.subscribe",
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "nativeControls": [
+      "Switch",
+      "Button",
+      "Input",
+      "Checkbox"
+    ],
+    "predictionRendering": "native editor text flow via leased ghost-hint CSS property; no preview text in draft DOM"
+  },
+  "release": {
+    "package": "@jhckevin/dsh-composer-prediction",
+    "channel": "latest",
+    "prerelease": true,
+    "updateOwner": "DSH native plugin manager",
+    "runtimeComponent": "composer-prediction",
+    "previousLocalPackage": "@local/dsh-composer-prediction",
+    "dataDirectoryUnchanged": true
+  },
+  "reasoningPolicy": {
+    "version": "minimum-v1",
+    "default": "disabled-if-supported-otherwise-model-minimum",
+    "parentConfigurationUnchanged": true,
+    "unknownPortableAliases": "pre-dispatch-declaration-required",
+    "capabilityProbes": "none",
+    "nativeNoControl": "omit-unadvertised-effort; server thinking unknown",
+    "configurable": true,
+    "setting": "reasoningMode: minimum(default) or configured",
+    "minimumCacheCompatibility": "beta2 results reused"
+  }
+}

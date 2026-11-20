@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "id": "generic-responses",
+  "label": "Generic responses",
+  "protocol": "responses",
+  "baseURL": "https://replace-with-your-provider.example/v1",
+  "model": "replace-with-model",
+  "accountId": "replace-with-account",
+  "credential": {
+    "env": "THIRD_PARTY_API_KEY"
+  },
+  "request": {
+    "historyMode": "portable-text",
+    "maxTokens": 1024,
+    "defaultContextWindow": 32768
+  },
+  "capabilities": {
+    "responseMode": "json"
+  },
+  "cache": {}
+}

@@ -1,0 +1,13 @@
+/node_modules/
+/plugin/node_modules/
+/.qa/
+/reference/
+/.release/
+/.cache/
+*.sqlite*
+*.db
+*.log
+.env*
+*.bundle
+.DS_Store
+/.visual/

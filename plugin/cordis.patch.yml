@@ -1,0 +1,5 @@
+- insert:
+    - id: composer-prediction
+      name: '@jhckevin/dsh-composer-prediction'
+      config:
+        enabled: true

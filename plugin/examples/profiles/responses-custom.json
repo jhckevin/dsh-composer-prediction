@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "id": "responses-custom",
+  "label": "Responses / 需填写端点模型和价格",
+  "protocol": "responses",
+  "baseURL": "https://api.openai.com/v1",
+  "model": "REPLACE_WITH_ENDPOINT_MODEL",
+  "accountId": "replace-with-your-provider-account-id",
+  "credential": {
+    "env": "PREDICTION_RESPONSES_API_KEY"
+  },
+  "request": {
+    "historyMode": "portable-text",
+    "reasoning": {
+      "effort": "low"
+    },
+    "max_output_tokens": 1024
+  },
+  "cache": {}
+}

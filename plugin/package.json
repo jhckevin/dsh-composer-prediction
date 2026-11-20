@@ -1,0 +1,103 @@
+{
+  "name": "@jhckevin/dsh-composer-prediction",
+  "version": "0.8.0-beta.4",
+  "type": "module",
+  "description": "Cache-aware next-message predictions for DeepSeek Harness, with local validation, workspace controls and transparent cost accounting.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.9",
+    "dsh": ">=0.2.2-rc.1 <0.3.0"
+  },
+  "exports": {
+    ".": "./src/index.mjs",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./assets/icon.png"
+  },
+  "files": [
+    "lib",
+    "pricing",
+    "examples",
+    "README.zh-CN.md",
+    "cordis.patch.yml",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "SOURCE.json",
+    "licenses",
+    "MANIFEST.sha256",
+    "src/index.mjs",
+    "src/core",
+    "src/client",
+    "instruction_prediction.md",
+    "assets",
+    "docs",
+    "locale",
+    "README.md",
+    "CHANGELOG.md",
+    "PROTOCOL-COMPAT.zh-CN.md",
+    "README.en.md"
+  ],
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "manifestVersion": 1
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.*",
+    "build": "node src/client/build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.27.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "jsdom": "27.1.0",
+    "zod": "4.6.6",
+    "semver": "7.8.6",
+    "eventsource-parser": "3.1.1",
+    "@huggingface/tokenizers": "0.2.0",
+    "js-tiktoken": "1.0.21"
+  },
+  "icon": "assets/icon.png",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "deepseek",
+    "composer-prediction",
+    "autocomplete",
+    "prompt-caching",
+    "llm",
+    "openai",
+    "anthropic",
+    "windows"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  },
+  "author": "jhckevin",
+  "homepage": "https://github.com/jhckevin/dsh-composer-prediction",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhckevin/dsh-composer-prediction.git",
+    "directory": "plugin"
+  },
+  "bugs": {
+    "url": "https://github.com/jhckevin/dsh-composer-prediction/issues"
+  }
+}

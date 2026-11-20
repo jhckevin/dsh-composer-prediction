@@ -1,0 +1,12 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {join} from 'node:path';
+import {root} from './setup.mjs';
+import {execFileSync} from 'node:child_process';
+const base=join(root,'plugin'),sha=data=>createHash('sha256').update(data).digest('hex');
+const source=JSON.parse(await readFile(join(base,'SOURCE.json'),'utf8'));
+source.version=JSON.parse(await readFile(join(base,'package.json'),'utf8')).version;
+for(const name of Object.keys(source.artifacts))source.artifacts[name]=sha(await readFile(join(base,name)));
+await writeFile(join(base,'SOURCE.json'),JSON.stringify(source,null,2)+'\n');
+const entries=JSON.parse(execFileSync('npm',['pack','--dry-run','--ignore-scripts','--json'],{cwd:base,encoding:'utf8'}))[0].files.map(x=>x.path).filter(x=>x!=='MANIFEST.sha256').sort();
+await writeFile(join(base,'MANIFEST.sha256'),(await Promise.all(entries.map(async name=>sha(await readFile(join(base,name)))+'  '+name))).join('\n')+'\n');
