@@ -3,7 +3,7 @@
 
 Current release: **0.8.0-beta.4** (beta).
 
-[简体中文](README.md) · [Architecture](docs/en/architecture.md) · [Boundaries](docs/en/boundaries.md)
+[简体中文](README.md) · [Features](docs/en/features.md) · [Architecture](docs/en/architecture.md) · [Boundaries](docs/en/boundaries.md)
 
 An unofficial next-message prediction plugin for DeepSeek Harness. After a normal assistant completion, a suggestion appears in the empty composer. **Tab** inserts an editable draft. You decide whether to send it.
 
@@ -39,7 +39,7 @@ On Windows, if dsh is not on PATH:
 
 Registry installations use DSH's native version checks. Users choose when to install an update. Offline file installations do not have the same registry update source.
 
-## Behavior
+## Features and usage
 
 - One prediction per eligible source after normal assistant completion. Errors, cancellation and interrupted replies do not trigger one.
 - Display and acceptance check the conversation, source revision and draft state. Starting a send or changing the source clears stale suggestions.
@@ -50,6 +50,8 @@ Registry installations use DSH's native version checks. Users choose when to ins
 Open **Settings → Composer predictions**. Reasoning defaults to **off / minimum**. Explicitly choose **Use backend configuration** and save to change it. Repairs follow the selected policy. Changing settings does not automatically regenerate the current turn.
 
 Use instruction_prediction.md for additional constraints. Local reliability rules take precedence.
+
+[Full feature guide](docs/en/features.md): triggers, conversation eligibility, both caches, backend selection, defaults and updates.
 
 ## Cache and accounting
 
@@ -64,6 +66,24 @@ Changing reasoning, models, tools, summaries or early history can reduce cache h
 **Prediction share = Prediction / (main conversation + Prediction).**
 
 Accounting is per conversation, currency and coverage period. It includes retries and repairs, captures the price at request start, and applies schedules declared by the pricebook. Unknown prices or usage never become zero. Missing cache details remain unknown; full coverage, historical gaps and estimate ranges are reported separately.
+
+## Failure handling
+
+| Condition | Behavior and recovery |
+| --- | --- |
+| Unfinished assistant reply or an existing draft | Wait for normal completion and eligible input; never overwrite |
+| Insufficient evidence | Return `suggestion:false`; show nothing for this turn |
+| Length, language or viewpoint failure | At most one automatic repair; optional truncation still passes other gates |
+| Transient network error | At most 3 additional retries shared across the task; configurable |
+| Dispatched request with incomplete usage | Stop automatic spending; retain unresolved accounting |
+| Explicit quota rejection | Pause passive prediction and arm recovery checks; manual retry remains allowed at the quota layer |
+| Unsupported balance API or cache detail | Keep unknown; no guessed endpoints or paid probes |
+| External history edit | Remove stale output and remap; pause below 50% estimated reusable-prefix retention |
+| Missing price or historical accounting | Block unpriced new predictions before dispatch; do not replace historical gaps with zero |
+
+Events run oldest to newest, retaining the latest 32. Context updates, snapshot checks and queue entries are not additional model calls. Use ledger physical attempts to investigate repeated spending.
+
+See [Failures, logs and recovery](docs/en/boundaries.md) for retry limits, balance recovery, context limits, third-party compatibility and why amounts can exist without a complete share.
 
 ## Settings
 
